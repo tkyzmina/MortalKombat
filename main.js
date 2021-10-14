@@ -12,7 +12,7 @@ const player2 = {
   name: "Swimmer",
   hp: 50,
   img: "http://reactmarathon-api.herokuapp.com/assets/subzero.gif",
-  weapon: ["ласты", "очки"],
+  weapon: ["ласты", "очки", "нож"],
   attack: function () {
     console.log(this.name + " Fight...");
   },

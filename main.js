@@ -1,4 +1,8 @@
 const arenas = document.querySelector(".arenas");
+const $randomButton = document.querySelector(".button");
+const MaxDamage = 20;
+const randomNumber = Math.ceil(Math.random() * MaxDamage);
+
 const player1 = {
   player: 1,
   name: "Fighter",
@@ -13,7 +17,7 @@ const player1 = {
 const player2 = {
   player: 2,
   name: "Swimmer",
-  hp: 50,
+  hp: 100,
   img: "http://reactmarathon-api.herokuapp.com/assets/subzero.gif",
   weapon: ["ласты", "очки", "нож"],
   attack: function () {
@@ -47,6 +51,36 @@ function createPlayer(playerObj) {
 
   return player;
 }
+
+function changeHP(player) {
+  const $playerLife = document.querySelector(
+    ".player" + player.player + " .life"
+  );
+  player.hp -= randomNumber;
+  $playerLife.style.width = player.hp + "%";
+
+  if (player.hp < 0) {
+    playerLose(player.name);
+    $playerLife.style.width = 0 + "%";
+    $randomButton.setAttribute("disabled", "disabled");
+  }
+}
+
+function playerLose(name) {
+  const loseTitle = createElement("div", "loseTitle");
+  loseTitle.textContent = name + " lose...";
+  arenas.appendChild(loseTitle);
+}
+
+$randomButton.addEventListener("click", function () {
+  const randomPlayerNumber = Math.ceil(Math.random() * 2);
+
+  if (randomPlayerNumber == 1) {
+    changeHP(player1);
+  } else {
+    changeHP(player2);
+  }
+});
 
 arenas.appendChild(createPlayer(player1));
 arenas.appendChild(createPlayer(player2));

@@ -1,7 +1,11 @@
 const arenas = document.querySelector(".arenas");
 const $randomButton = document.querySelector(".button");
-const MaxDamage = 20;
-const randomNumber = Math.ceil(Math.random() * MaxDamage);
+
+
+function getRundom(num) {
+  return Math.ceil(Math.random() * num);
+}
+
 
 const player1 = {
   player: 1,
@@ -56,29 +60,41 @@ function changeHP(player) {
   const $playerLife = document.querySelector(
     ".player" + player.player + " .life"
   );
-  player.hp -= randomNumber;
-  $playerLife.style.width = player.hp + "%";
+  player.hp -= getRundom(20);
 
-  if (player.hp < 0) {
-    playerLose(player.name);
-    $playerLife.style.width = 0 + "%";
-    $randomButton.setAttribute("disabled", "disabled");
+  if (player.hp <= 0) {
+    player.hp = 0;
   }
+
+  $playerLife.style.width = player.hp + "%";
 }
 
-function playerLose(name) {
+function playerWins(name) {
   const loseTitle = createElement("div", "loseTitle");
-  loseTitle.textContent = name + " lose...";
-  arenas.appendChild(loseTitle);
+  if (name) {
+    loseTitle.innerText = name + " wins!";
+  } else {
+    loseTitle.innerText = " draw";
+  }
+
+  return loseTitle;
 }
 
 $randomButton.addEventListener("click", function () {
-  const randomPlayerNumber = Math.ceil(Math.random() * 2);
+  changeHP(player1);
+  changeHP(player2);
 
-  if (randomPlayerNumber == 1) {
-    changeHP(player1);
-  } else {
-    changeHP(player2);
+  if (player1.hp == 0 || player2.hp == 0) {
+    $randomButton.disabled = true;
+  }
+
+  if (player1.hp === 0 && player1.hp < player2.hp) {
+    arenas.appendChild(playerWins(player2.name));
+  } else if (player2.hp === 0 && player2.hp < player1.hp) {
+    arenas.appendChild(playerWins(player1.name));
+  } else if (player1.hp === 0 && player2.hp === 0) {
+    arenas.appendChild(playerWins());
+
   }
 });
 

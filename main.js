@@ -1,7 +1,8 @@
 const arenas = document.querySelector(".arenas");
 const $randomButton = document.querySelector(".button");
+const $reloadButton = document.querySelector(".reloadWrap .button");
 
-function getRundom(num) {
+function getRandom(num) {
   return Math.ceil(Math.random() * num);
 }
 
@@ -14,6 +15,9 @@ const player1 = {
   attack: function () {
     console.log(this.name + " Fight...");
   },
+  changeHP: changeHP,
+  elHP: elHP,
+  renderHP: renderHP,
 };
 
 const player2 = {
@@ -25,6 +29,9 @@ const player2 = {
   attack: function () {
     console.log(this.name + " Fight...");
   },
+  changeHP: changeHP,
+  elHP: elHP,
+  renderHP: renderHP,
 };
 
 function createElement(tag, className) {
@@ -54,17 +61,20 @@ function createPlayer(playerObj) {
   return player;
 }
 
-function changeHP(player) {
-  const $playerLife = document.querySelector(
-    ".player" + player.player + " .life"
-  );
-  player.hp -= getRundom(20);
-
-  if (player.hp <= 0) {
-    player.hp = 0;
+function changeHP(num) {
+  if (this.hp > 0) {
+    this.hp -= num;
+  } else if (this.hp <= 0) {
+    this.hp = 0;
   }
+}
 
-  $playerLife.style.width = player.hp + "%";
+function elHP() {
+  return document.querySelector(".player" + this.player + " .life");
+}
+
+function renderHP() {
+  this.elHP().style.width = this.hp + "%";
 }
 
 function playerWins(name) {
@@ -78,12 +88,33 @@ function playerWins(name) {
   return loseTitle;
 }
 
+function createReloadButton() {
+  const divReload = document.createElement("div");
+  const btnReload = document.createElement("button");
+
+  divReload.className = "reloadWrap";
+  btnReload.className = "button";
+  btnReload.innerText = "Restart";
+
+  divReload.appendChild(btnReload);
+
+  btnReload.addEventListener("click", function () {
+    window.location.reload();
+  });
+
+  return divReload;
+}
+
 $randomButton.addEventListener("click", function () {
-  changeHP(player1);
-  changeHP(player2);
+  player1.changeHP(getRandom(20));
+  player2.changeHP(getRandom(20));
+
+  player1.renderHP();
+  player2.renderHP();
 
   if (player1.hp == 0 || player2.hp == 0) {
     $randomButton.disabled = true;
+    arenas.appendChild(createReloadButton());
   }
 
   if (player1.hp === 0 && player1.hp < player2.hp) {

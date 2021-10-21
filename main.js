@@ -2,9 +2,11 @@ const arenas = document.querySelector(".arenas");
 const $randomButton = document.querySelector(".button");
 const $reloadButton = document.querySelector(".reloadWrap .button");
 
-function getRandom(num) {
+
+function getRundom(num) {
   return Math.ceil(Math.random() * num);
 }
+
 
 const player1 = {
   player: 1,
@@ -123,6 +125,7 @@ $randomButton.addEventListener("click", function () {
     arenas.appendChild(playerWins(player1.name));
   } else if (player1.hp === 0 && player2.hp === 0) {
     arenas.appendChild(playerWins());
+
   }
 });
 

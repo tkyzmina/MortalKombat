@@ -165,6 +165,7 @@ $formFight.addEventListener("submit", function (evt) {
     arenas.appendChild(playerWins(player1.name));
   } else if (player1.hp === 0 && player2.hp === 0) {
     arenas.appendChild(playerWins());
+
   }
 });
 

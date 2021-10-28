@@ -1,37 +1,15 @@
 import { getRandom, getTime } from "./utils.js";
 import createReloadButton from "./modules/createReloadButton.js";
 import { enemyAttack, playerAttack } from "./modules/attack.js";
-import { changeHP, renderHP, elHP } from "./modules/hp.js";
 import { playerWins } from "./modules/playerWins.js";
 import { createPlayer } from "./modules/createPlayer.js";
 import { getTextLog } from "./modules/getTextLog.js";
+import { player1, player2 } from "./player.js";
 
 const arenas = document.querySelector(".arenas");
 const $formFight = document.querySelector(".control");
 const $submitButton = $formFight.querySelector(".button");
 const $chat = document.querySelector(".chat");
-
-const player1 = {
-  player: 1,
-  name: "Fighter",
-  hp: 100,
-  img: "http://reactmarathon-api.herokuapp.com/assets/liukang.gif",
-  weapon: ["меч", "арбалет"],
-  changeHP,
-  elHP,
-  renderHP,
-};
-
-const player2 = {
-  player: 2,
-  name: "Swimmer",
-  hp: 100,
-  img: "http://reactmarathon-api.herokuapp.com/assets/subzero.gif",
-  weapon: ["ласты", "очки", "нож"],
-  changeHP,
-  elHP,
-  renderHP,
-};
 
 const generateLogs = (
   type,

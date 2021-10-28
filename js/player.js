@@ -27,7 +27,7 @@ class Player {
 
 const player1 = new Player({
   player: 1,
-  name: "Swimmer",
+  name: "Fighter",
   hp: 100,
   img: "http://reactmarathon-api.herokuapp.com/assets/subzero.gif",
   weapon: ["ласты", "очки", "нож"],

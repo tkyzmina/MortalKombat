@@ -8,12 +8,11 @@ const createReloadButton = () => {
 
   btnReload.innerText = "Restart";
 
-  divReload.appendChild(btnReload);
-
   btnReload.addEventListener("click", function () {
     window.location.reload();
   });
 
+  divReload.appendChild(btnReload);
   arenas.appendChild(divReload);
 };
 

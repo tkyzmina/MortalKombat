@@ -5,7 +5,7 @@ const HIT = {
 };
 const ATTACK = ["head", "body", "foot"];
 
-const logs = {
+const LOGS = {
   start:
     "Часы показывали [time], когда [player1] и [player2] бросили вызов друг другу.",
   end: [
@@ -46,4 +46,4 @@ const logs = {
   draw: "Ничья - это тоже победа!",
 };
 
-export { HIT, ATTACK, logs };
+export { HIT, ATTACK, LOGS };
